@@ -132,7 +132,26 @@
           </button>
         </form>
       </aside>
+
+      <!-- Info card section -->
+      <section class="info-section">
+        <!-- Default empty message -->
+        <div class="info-header">
+          <h2 class="info-title">Bay Information</h2>
+          <button id="Delete-data" class="btn btn-outline btn-danger">
+            Delete all
+          </button>
+        </div>
+        <div class="empty-msg">
+          <span class="empty-icon">🪴</span>
+          <h3 class="empty-text">No bays recorded.</h3>
+        </div>
+
+        <!-- Where info cards will be dynamically added -->
+        <ul id="bay-cards" class="bay-grid" aria-live="polite"></ul>
+      </section>
     </main>
+
     <footer></footer>
   </body>
 </html>
