@@ -31,3 +31,41 @@ body {
   display: flex;
   flex-direction: column;
 }
+
+/* Header styling */
+.dash-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--bg-section);
+  border-bottom: 1px solid var(--bg-border);
+  padding: 1px 2px;
+}
+
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.brand-logo {
+  font-size: 1.5rem;
+  padding: 0.75rem 0.25rem 0.75rem 0.75rem;
+}
+
+.brand-title {
+  font-size: 1.5rem;
+}
+
+.header-count {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.bay-total {
+  background-color: var(--primary);
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  margin-right: 0.75rem;
+}
