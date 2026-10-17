@@ -106,6 +106,7 @@ body {
   flex-direction: column;
   justify-content: stretch;
 }
+
 .data-form {
   display: flex;
   flex-direction: column;
@@ -151,4 +152,36 @@ body {
 .form-input:focus {
   outline: none;
   border-color: var(--primary);
+}
+
+.info-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  gap: 2rem;
+  background-color: var(--bg-section);
+  border: 1.5px solid var(--bg-border);
+  border-radius: 10px;
+  padding: 1rem 1rem;
+  height: 75vh;
+  width: 45vw;
+}
+
+.info-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.empty-msg {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  gap: 1rem;
+}
+
+.empty-icon {
+  font-size: 5rem;
 }
