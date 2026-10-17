@@ -44,8 +44,17 @@ body {
   background-color: var(--primary);
 }
 
+.btn-outline:hover {
+  background-color: var(--primary);
+}
+
 .btn-primary:hover {
   background-color: var(--primary-hover);
+}
+
+.btn-outline {
+  background-color: var(--bg-section);
+  color: var(--text-color);
 }
 
 /* Header styling */
@@ -184,4 +193,17 @@ body {
 
 .empty-icon {
   font-size: 5rem;
+}
+
+.dash-footer {
+  display: flex;
+  justify-content: center;
+  background-color: var(--bg-section);
+  border-top: 1.75px solid var(--bg-border);
+}
+
+.footer-brand {
+  padding: 2.5vh;
+  color: var(--text-muted);
+  font-size: 0.8rem;
 }
