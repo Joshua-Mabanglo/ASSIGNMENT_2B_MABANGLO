@@ -44,17 +44,19 @@ body {
   background-color: var(--primary);
 }
 
-.btn-outline:hover {
-  background-color: var(--primary);
+.btn-outline-danger:hover {
+  background-color: var(--hazard);
+  color: var(--text-color);
 }
 
 .btn-primary:hover {
   background-color: var(--primary-hover);
 }
 
-.btn-outline {
-  background-color: var(--bg-section);
-  color: var(--text-color);
+.btn-outline-danger {
+  background-color: var(--bg-main);
+  border-color: var(--hazard);
+  color: var(--hazard);
 }
 
 /* Header styling */
@@ -116,7 +118,7 @@ body {
   justify-content: stretch;
 }
 
-.data-form {
+.bay-form {
   display: flex;
   flex-direction: column;
   justify-content: stretch;
@@ -206,4 +208,61 @@ body {
   padding: 2.5vh;
   color: var(--text-muted);
   font-size: 0.8rem;
+}
+
+.bay-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  max-height: 600px;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+}
+
+.bay-card {
+  background: var(--bg-main);
+  border: 2px solid var(--optimal);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  gap: 1.5rem;
+  padding: 1rem;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-info {
+  display: flex;
+  justify-content: space-around;
+  gap: 0.5rem;
+}
+
+.card-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.card-title {
+  font-weight: 800;
+  font-size: 1.25rem;
+}
+
+.time {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+
+.risk {
+  font-size: 1.1rem;
+  font-weight: 800;
+  background: var(--optimal);
+  padding: 0.25rem 0.5rem;
+  border-radius: 9999px;
 }

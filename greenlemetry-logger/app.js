@@ -184,4 +184,60 @@
       render();
     }
   });
+
+  // DOM RENDERING FUNCTION
+  function render() {
+    bayCount.textContent = records.length;
+
+    // if there is no card data, display empty message
+    if (records.length === 0) {
+      emptyState.classList.remove("hidden");
+      bayCards.innerHTML = "";
+      return;
+    }
+
+    emptyState.classList.add("hidden");
+
+    // Initialize virtual DOM
+    const piece = document.createDocumentFragment();
+
+    // Iterate through records array and create a card for each one
+    records.forEach(function (rec) {
+      const li = document.createElement("li");
+      li.className = "bay-card status-" + rec.risk.level;
+
+      li.innerHTML = `<div class="card-header">
+              <div class="card-title">${escapeHtml(rec.name)}</div>
+              <div class="time">At ${rec.timestamp}</div>
+              <div class="risk-icon ${rec.risk.level}">${rec.risk.label}</div>
+            </div>
+            <div class="card-info">
+              <div class="card-row">
+                <div class="info-item"><span>pH Level</span>${rec.ph}</div>
+                <div class="info-item">
+                  <span>Conductivity</span>${rec.conduct}
+                </div>
+              </div>
+              <div class="card-row">
+                <div class="info-item"><span>Temperature</span>${rec.temp}</div>
+                <div class="info-item"><span>Humidity</span>${rec.humid}</div>
+              </div>
+            </div>
+            <button
+              class="btn btn-outline-danger delete-card"
+              data-id="${rec.id}"
+            >
+              Delete Bay
+            </button>`;
+
+      // Add above Html into virtual DOM
+      piece.appendChild(li);
+    });
+
+    // Reset UI
+    bayCards.innerHTML = "";
+
+    // Inject virtual DOM into the original DOM
+    bayCards.appendChild(piece);
+  }
 });
