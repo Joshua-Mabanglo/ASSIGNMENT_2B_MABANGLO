@@ -55,7 +55,7 @@
     // Array to track any errors
     const errors = [];
 
-    if (!data.name.trim()) {
+    if (!data.number.trim()) {
       errors.push("Patient name is required.\n");
     }
     if (isNaN(data.ph) || data.ph < 0 || data.ph > 14) {
@@ -104,4 +104,84 @@
     // Warning check
     return { level: "warning", label: "Warning" };
   }
+
+  // EVENT HANDLERS
+
+  // Submit button
+  dataForm.addEventListener("submit", (event) => {
+    // Prevent reload on submission
+    event.preventDefault();
+
+    // Parse submitted values in the form
+    const formInput = {
+      id: crypto.randomUUID(),
+      number: parseInt(inputBayNumber.value, 10),
+      ph: parseFloat(inputPhLevel.value),
+      conduct: parseFloat(inputConductivity.value),
+      temp: parseFloat(inputAirTemp.value),
+      humid: parseInt(inputHumidity.value, 10),
+      timestamp: new Date().toLocaleTimeString([], {
+        hour: "2-digit",
+        minute: "2-digit",
+      }),
+    };
+
+    // Run validation checks
+    const errorCheck = checkInput(formInput);
+
+    // If an error is found, display error
+    if (errorCheck.length > 0) {
+      displayError(errorCheck.join(" "));
+      return;
+    }
+
+    // If no error, hide error panel
+    hideError();
+
+    // Decide risk category
+    formInput.risk = inputRisk(
+      formInput.ph,
+      formInput.conduct,
+      formInput.temp,
+      formInput.humid
+    );
+
+    records.unshift(formInput);
+
+    // Save input to memory & reset input form
+    writeRecords();
+
+    dataForm.reset();
+
+    inputBayNumber.focus();
+  });
+
+  // Use event bubbling to delete individual cards
+  bayCards.addEventListener("click", (event) => {
+    // If button was a "delete card button", find the card where the button was clicked
+    const target = event.target;
+    if (target.classList.contains("delete-card")) {
+      const targetId = target.dataset.id;
+      records = records.filter(function (record) {
+        return record.id !== targetId;
+      });
+
+      // Repaint the UI
+      writeRecords();
+      render();
+    }
+  });
+
+  // Event handler to delete all cards
+  deleteData.addEventListener("click", (event) => {
+    // If no cards, do nothing
+    if (records.length === 0) return;
+
+    // Confirm if user wants to delete cards
+    if (confirm("Are you sure you want to delete all the cards?")) {
+      records = [];
+      writeRecords();
+      render();
+    }
+  });
 });
