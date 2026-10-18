@@ -17,4 +17,34 @@
   const conductivity = document.getElementById("conductivity");
   const airTemp = document.getElementById("air-temp");
   const humidity = document.getElementById("humidity");
+
+  // Initialize state
+  let records = loadRecords();
+
+  // Initial UI render
+  render();
+
+  // STORAGE OPERATIONS
+
+  // READ ops
+  function readRecords() {
+    try {
+      // Connect to data store
+      const store = localStorage.getItem(STORAGE_KEY);
+
+      // Was anything returned?
+      return store ? JSON.parse(store) : [];
+    } catch (error) {
+      console.error("Could not retrieve data from local storage.");
+    }
+  }
+
+  function writeRecords() {
+    try {
+      // Write to data store
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
+    } catch (error) {
+      console.error("Could not save data to your data store.");
+    }
+  }
 });
