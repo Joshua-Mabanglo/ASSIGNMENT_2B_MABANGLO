@@ -58,13 +58,12 @@ html
 					- label for=“conductivity” class=“form-label” (Text: Electrical Conductivity (mS/cm)) span class= “required” * [STATIC]
 					- input type=“number” name=“conductivity” id=“conductivity” class=“form-control” min=“0” max=“3” step= “0.1” placeholder= “1.5” required (CSS – padding, border-radius, transition) [STATIC]
 			- div class=“form-row” (CSS - flexbox: row, space-between & center) [STATIC]
-     				- div class=“form-group” (CSS – flexbox: column, gap) [STATIC]
-						- label for=“air-temp” class=“form-label” (Text: Air Temperature (F)) span class= “required” * [STATIC]
-						- input type=“number” name=“air-temp” id=“air-temp” class=“form-control”
-min=“-100” max=“175” step= “0.1” placeholder= “85” required (CSS – padding, border-radius, transition) [STATIC]
-					- div class=“form-group” (CSS – flexbox: column, gap) [STATIC]
-						- label for=“humidity” class=“form-label” (Text: Relative Humidity (%)) span class= “required” * [STATIC]
-       					- input type=“number” name=“humidity” id=“humidity” class=“form-control” min=“0” max=“100” step= “1” placeholder=“50” required (CSS – padding, border-radius, transition) [STATIC]
+    			- div class=“form-group” (CSS – flexbox: column, gap) [STATIC]
+					- label for=“air-temp” class=“form-label” (Text: Air Temperature (F)) span class= “required” * [STATIC]
+					- input type=“number” name=“air-temp” id=“air-temp” class=“form-control”min=“-100” max=“175” step= “0.1” placeholder= “85” required (CSS – padding, border-radius, transition) [STATIC]
+      			 - div class=“form-group” (CSS – flexbox: column, gap) [STATIC]
+					- label for=“humidity” class=“form-label” (Text: Relative Humidity (%)) span class= “required” * [STATIC]
+	 	 			- input type=“number” name=“humidity” id=“humidity” class=“form-control” min=“0” max=“100” step= “1” placeholder=“50” required (CSS – padding, border-radius, transition) [STATIC]
 			- btn type=“submit” id=“form-submit” class= “btn btn-primary” (Text: Record Bay Telemetry) (CSS – padding, border-radius, transition) [STATIC] (Event: type “submit”)
 - section=“info-section” (CSS – flexbox: column, space-evenly & center) [STATIC]
 	- div class=“info-header” (CSS – flexbox: row, space-between & center) [STATIC]
@@ -89,7 +88,7 @@ transition) [STATIC]
 				- btn type=“btn” class=“btn btn-outline btn-danger” (Text: Delete Bay) (CSS – padding, border-radius, transition) [DYNAMIC] (Event: type “click”)
 			- div class= “card-footer” (CSS – flexbox: center & center)  [DYNAMIC]
 				- h4 class=“card-title” (Text will be calculated status) [DYNAMIC]
-- footer=“dash-footer” (CSS - flexbox: row, space-between & center) [STATIC]
+				- footer=“dash-footer” (CSS - flexbox: row, space-between & center) [STATIC]
 	- p class=“footer-brand” &copy; (Text: 2026 Greenlemetry Inc. Designed for CSI 3150.) [STATIC]
 
 Data Schema
