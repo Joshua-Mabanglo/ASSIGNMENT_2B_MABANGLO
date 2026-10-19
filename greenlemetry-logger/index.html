@@ -39,7 +39,7 @@
           <!-- Hidden incorrect input warning -->
           <div
             id="form-error-banner"
-            class="alarm alarm-danger hidden"
+            class="alarm-danger hidden"
             role="alarm"
           ></div>
 
@@ -64,13 +64,13 @@
           <!-- Inputs 2 & 3 -->
           <div class="form-row">
             <div class="form-group">
-              <label for="pH-level" class="form-label"
+              <label for="ph-level" class="form-label"
                 >pH Level <span class="required">*</span></label
               >
               <input
                 type="number"
-                name="pH-level"
-                id="pH-level"
+                name="ph-level"
+                id="ph-level"
                 class="form-input"
                 min="0"
                 max="14"
@@ -152,10 +152,10 @@
             Delete all
           </button>
         </div>
-        <!-- <div id="empty-state" class="empty-msg">
+        <div id="empty-state" class="empty-state">
           <span class="empty-icon">🪴</span>
           <h3 class="empty-text">No bays recorded.</h3>
-        </div> -->
+        </div>
 
         <!-- Where info cards will be dynamically added -->
         <ul id="bay-cards" class="bay-grid" aria-live="polite"></ul>

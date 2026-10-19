@@ -1,5 +1,5 @@
 (function () {
-  ("use strict()"); // show errors
+  "use strict()"; // show errors
 
   const STORAGE_KEY = "agrosens_telemetry_records_v1";
 
@@ -13,13 +13,13 @@
 
   // Load input fields into JS objects
   const inputBayNumber = document.getElementById("bay-number");
-  const inputPhLevel = document.getElementById("ph-Level");
+  const inputPhLevel = document.getElementById("ph-level");
   const inputConductivity = document.getElementById("conductivity");
   const inputAirTemp = document.getElementById("air-temp");
   const inputHumidity = document.getElementById("humidity");
 
   // Initialize state
-  let records = loadRecords();
+  let records = readRecords();
 
   // Initial UI render
   render();
@@ -35,7 +35,8 @@
       // Was anything returned?
       return store ? JSON.parse(store) : [];
     } catch (error) {
-      console.error("Could not retrieve data from local storage.");
+      console.error("Could not retrieve data from local storage.", error);
+      return [];
     }
   }
 
@@ -44,7 +45,7 @@
       // Write to data store
       localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
     } catch (error) {
-      console.error("Could not save data to your data store.");
+      console.error("Could not save data to your data store.", error);
     }
   }
 
@@ -55,19 +56,19 @@
     // Array to track any errors
     const errors = [];
 
-    if (!data.number.trim()) {
-      errors.push("Patient name is required.\n");
+    if (isNaN(data.number.toString().trim())) {
+      errors.push("Bay number is required.");
     }
     if (isNaN(data.ph) || data.ph < 0 || data.ph > 14) {
       errors.push("pH level must be a number between 0 - 14.");
     }
-    if (isNaN(data.conduct) || data.conduct < 0 || data.conduct > 14) {
+    if (isNaN(data.conduct) || data.conduct < 0 || data.conduct > 3) {
       errors.push("Electrical Conductivity must be a number between 0 - 3.");
     }
-    if (isNaN(data.temp) || data.temp < 0 || data.temp > 14) {
+    if (isNaN(data.temp) || data.temp < -50 || data.temp > 125) {
       errors.push("Air temperature must be a number between -50 - 125.");
     }
-    if (isNaN(data.humid) || data.humid < 0 || data.humid > 14) {
+    if (isNaN(data.humid) || data.humid < 0 || data.humid > 100) {
       errors.push("Relative humidity must be a number between 0 - 100.");
     }
 
@@ -131,12 +132,12 @@
 
     // If an error is found, display error
     if (errorCheck.length > 0) {
-      displayError(errorCheck.join(" "));
+      errorMessage(errorCheck.join(" "));
       return;
     }
 
     // If no error, hide error panel
-    hideError();
+    noErrorMessage();
 
     // Decide risk category
     formInput.risk = inputRisk(
@@ -150,6 +151,7 @@
 
     // Save input to memory & reset input form
     writeRecords();
+    render();
 
     dataForm.reset();
 
@@ -190,12 +192,13 @@
     bayCount.textContent = records.length;
 
     // if there is no card data, display empty message
+    console.log(records.length);
     if (records.length === 0) {
       emptyState.classList.remove("hidden");
       bayCards.innerHTML = "";
       return;
     }
-
+    console.log("remove hidden");
     emptyState.classList.add("hidden");
 
     // Initialize virtual DOM
@@ -206,21 +209,28 @@
       const li = document.createElement("li");
       li.className = "bay-card status-" + rec.risk.level;
 
+      console.log(li.className);
       li.innerHTML = `<div class="card-header">
-              <div class="card-title">${escapeHtml(rec.name)}</div>
+              <div class="card-title">Bay ${escapeHtml(
+                rec.number.toString()
+              )}</div>
               <div class="time">At ${rec.timestamp}</div>
-              <div class="risk-icon ${rec.risk.level}">${rec.risk.label}</div>
+              <div class="risk-icon-${rec.risk.level}">${rec.risk.label}</div>
             </div>
             <div class="card-info">
               <div class="card-row">
-                <div class="info-item"><span>pH Level</span>${rec.ph}</div>
+                <div class="info-item"><span>pH Level: </span>${rec.ph}</div>
                 <div class="info-item">
-                  <span>Conductivity</span>${rec.conduct}
+                  <span>Conductivity: </span>${rec.conduct} mS/cm
                 </div>
               </div>
               <div class="card-row">
-                <div class="info-item"><span>Temperature</span>${rec.temp}</div>
-                <div class="info-item"><span>Humidity</span>${rec.humid}</div>
+                <div class="info-item"><span>Temperature: </span>${
+                  rec.temp
+                } F</div>
+                <div class="info-item"><span>Humidity: </span>${
+                  rec.humid
+                }%</div>
               </div>
             </div>
             <button
@@ -240,4 +250,24 @@
     // Inject virtual DOM into the original DOM
     bayCards.appendChild(piece);
   }
-});
+
+  // Show error message if there are errors
+  function errorMessage(message) {
+    errorBanner.textContent = message;
+    errorBanner.classList.remove("hidden");
+  }
+
+  // Hide error message if there are no errors
+  function noErrorMessage() {
+    errorBanner.textContent = "";
+    errorBanner.classList.add("hidden");
+  }
+
+  // Sanitize user input
+  function escapeHtml(str) {
+    return str
+      .replace(/&/g, "&amp")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;");
+  }
+})();

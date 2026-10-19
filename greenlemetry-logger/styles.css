@@ -9,8 +9,8 @@
   --primary: #abe196;
   --primary-hover: #8cbb79;
   --optimal: #ace697;
-  --warning: #f9e882;
-  --hazard: #fd6a6a;
+  --warning: #f8e26b;
+  --hazard: #ff7575;
 
   --font-family: "Figtree", sans-serif;
   --transition-speed: 0.3;
@@ -72,6 +72,18 @@ body {
   z-index: 9999;
 }
 
+.hidden {
+  display: none !important;
+}
+
+.alarm-danger {
+  background: var(--hazard);
+  padding: 0.5rem;
+  color: var(--bg-main);
+  font-size: 0.8rem;
+  border-radius: 8px;
+}
+
 .header-brand {
   display: flex;
   align-items: center;
@@ -122,7 +134,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: stretch;
-  gap: 2rem;
+  gap: 1.75rem;
   background-color: var(--bg-section);
   border: 1.5px solid var(--bg-border);
   border-radius: 10px;
@@ -140,6 +152,7 @@ body {
 .form-group {
   display: flex;
   flex-direction: column;
+  flex: 1;
 }
 
 .form-label {
@@ -158,6 +171,7 @@ body {
   border-radius: 10px;
   padding: 0.75rem 0.5rem;
   width: 20vw;
+  flex: 1;
 }
 
 .form-input:focus {
@@ -184,7 +198,7 @@ body {
   align-items: center;
 }
 
-.empty-msg {
+.empty-state {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -213,11 +227,10 @@ body {
 .bay-grid {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
-
+  gap: 1.5rem;
   max-height: 600px;
   overflow-y: auto;
-  padding-right: 0.5rem;
+  padding: 0rem 1.5rem;
 }
 
 .bay-card {
@@ -229,6 +242,36 @@ body {
   justify-content: space-evenly;
   gap: 1.5rem;
   padding: 1rem;
+}
+
+.status-optimal {
+  border: 2px solid var(--optimal);
+}
+.risk-icon-optimal {
+  background: var(--optimal);
+  padding: 0.4rem 0.6rem;
+  border-radius: 9999px;
+  font-weight: 800;
+}
+
+.status-warning {
+  border: 2px solid var(--warning);
+}
+.risk-icon-warning {
+  background: var(--warning);
+  padding: 0.4rem 0.6rem;
+  border-radius: 9999px;
+  font-weight: 800;
+}
+
+.status-critical {
+  border: 2px solid var(--hazard);
+}
+.risk-icon-critical {
+  background: var(--hazard);
+  padding: 0.4rem 0.6rem;
+  border-radius: 9999px;
+  font-weight: 800;
 }
 
 .card-header {
@@ -261,8 +304,36 @@ body {
 
 .risk {
   font-size: 1.1rem;
-  font-weight: 800;
+  font-weight: 400;
   background: var(--optimal);
   padding: 0.25rem 0.5rem;
   border-radius: 9999px;
+}
+
+.info-item span {
+  font-weight: 800;
+}
+
+/* Responsive design */
+@media (max-width: 860px) {
+  .dash-main {
+    flex-direction: column;
+  }
+
+  .bay-form {
+    height: 40vh;
+    width: 95vw;
+    max-height: 600px;
+    overflow-y: auto;
+  }
+
+  .info-section {
+    height: 40vh;
+    width: 95vw;
+    max-height: 800px;
+  }
+
+  .bay-card {
+    gap: 0.5rem;
+  }
 }
