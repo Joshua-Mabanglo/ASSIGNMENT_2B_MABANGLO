@@ -1,4 +1,4 @@
-<html>
+`<html>
 - <head>
     - <header class=“dash-header”> (CSS - flexbox: row, space-between & center, position: sticky, top: 0, z-index: 9999) [STATIC]
         - <div class=“header-brand”> (CSS - flexbox: center) [STATIC]
@@ -60,4 +60,4 @@ transition) [STATIC]
 <h4 class=“card-title”> (Text will be calculated status) [DYNAMIC]
 		<footer=“dash-footer”> (CSS - flexbox: row, space-between & center) [STATIC]
 <p class=“footer-brand” &copy;> (Text: 2026 Greenlemetry Inc. Designed for CSI 3150.) [STATIC]
-<img width="468" height="624" alt="image" src="https://github.com/user-attachments/assets/135c04a4-37c4-4c1e-b76c-f2f21a74043f" />
+<img width="468" height="624" alt="image" src="https://github.com/user-attachments/assets/135c04a4-37c4-4c1e-b76c-f2f21a74043f" />`
